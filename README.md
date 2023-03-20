@@ -30,17 +30,17 @@ Fitwalk es una aplicación móvil que tiene como propósito llevar un registro d
 - memoria interna: Se usa para poder descargar la aplicación y los datos necesarios para mantenerla funcional  
 - Sensores de movimiento: Para reconocer lo movimientos del usuario.  
 
-#Preguntas de QUICES
+# Preguntas de QUICES
 
 - ¿Qué diferencia hay entre DPs, SPs y PX?
-•PX: usan los píxeles de la pantalla.
+  •PX: usan los píxeles de la pantalla.
 
-•DPs (density-independent pixels): tienen el mismo tamaño sin tener en cuenta que tantos pixeles hay en la pantalla
+  •DPs (density-independent pixels): tienen el mismo tamaño sin tener en cuenta que tantos pixeles hay en la pantalla
 
-•SPs (scalable pixels): es para el tamaño del texto
+  •SPs (scalable pixels): es para el tamaño del texto
 
-¿Qué es un text view? ¿Cuáles son los 2 atributos (fuera del texto) que son obligatorios y que aplican también para cualquier objeto dentro de cualquier layout?
-Alto y ancho
+- ¿Qué es un text view? ¿Cuáles son los 2 atributos (fuera del texto) que son obligatorios y que aplican también para cualquier objeto dentro de cualquier layout?
+  Alto y ancho
 
 ¿Cuál es la diferencia entre LinearLayout y ConstrainLayout?
 LinearLayout organiza los elementos en una dirección lineal (horizontal o vertical). ConstraintLayout utiliza restricciones para posicionar y ajustar los elementos en una vista.
