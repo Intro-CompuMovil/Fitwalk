@@ -79,11 +79,15 @@ A partir del 6 api 23 piden permisos CADA VEZ QUE SE EJECUTA
 
 antes en la 5.1 api 22 se necesitaba borrar para quitar permisos
 
-Con riesgo: gps, microfono fotos, calendario, contactos
+**Con riesgo:** gps, microfono fotos, calendario, contactos
 
-normales: Internet, bluetooth, zona horaria
+**normales:** Internet, bluetooth, zona horaria
 
-ContextCompact.ChechSelfPermision(): es para pedir permiso en un momento especifico
+Es para pedir permiso en un momento especifico
+
+```bash
+ContextCompact.ChechSelfPermision()
+```
 
 shouldShowRequestestPermisionRationale(): texto de porque dar permiso
 
