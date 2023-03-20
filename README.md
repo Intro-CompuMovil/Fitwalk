@@ -30,7 +30,7 @@ Fitwalk es una aplicación móvil que tiene como propósito llevar un registro d
 - memoria interna: Se usa para poder descargar la aplicación y los datos necesarios para mantenerla funcional  
 - Sensores de movimiento: Para reconocer lo movimientos del usuario.  
 
-# Preguntas de QUICES
+## Preguntas de QUICES
 
 - ¿Qué diferencia hay entre DPs, SPs y PX?
   •PX: usan los píxeles de la pantalla.
