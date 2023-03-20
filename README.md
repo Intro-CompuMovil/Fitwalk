@@ -43,32 +43,32 @@ Fitwalk es una aplicación móvil que tiene como propósito llevar un registro d
 - ¿Qué es un text view? ¿Cuáles son los 2 atributos (fuera del texto) que son obligatorios y que aplican también para cualquier objeto dentro de cualquier layout? <br>
   Alto y ancho
 
-- ¿Cuál es la diferencia entre LinearLayout y ConstrainLayout?
+- ¿Cuál es la diferencia entre LinearLayout y ConstrainLayout? <br>
   LinearLayout organiza los elementos en una dirección lineal (horizontal o vertical). ConstraintLayout utiliza restricciones para posicionar y ajustar los   elementos en una vista.
 
-- ¿En dónde se deben guardar las cadenas de texto que se quieren mostrar en una aplicación Android?
+- ¿En dónde se deben guardar las cadenas de texto que se quieren mostrar en una aplicación Android? <br>
   En el archivo strings
 
-- ¿Cómo se llama el componente que permite enviar mensajes temporales en pantalla?
+- ¿Cómo se llama el componente que permite enviar mensajes temporales en pantalla? <br>
   Toast
 
-- ¿Qué clase agrupa los identificadores de los recursos en Android?
+- ¿Qué clase agrupa los identificadores de los recursos en Android? <br>
   La clase: R
 
-- ¿Cuándo se llama a onDestroy()?
+- ¿Cuándo se llama a onDestroy()? <br>
   Cuando la actividad termina o está siendo destruida y a punto de ser eliminada de la memoria.
 
-- ¿Cómo se llama el objeto que permite lanzar una nueva actividad desde Kotlin?
+- ¿Cómo se llama el objeto que permite lanzar una nueva actividad desde Kotlin? <br>
   Intent
 
-- ¿Para que se usa el FrameLayout?
+- ¿Para que se usa el FrameLayout? <br>
   Para tener objetos transparentes que se pueden poner uno encima de otro, ej una imagen encima de otro objeto
 
-- ¿Para qué sirve un adapter?
+- ¿Para qué sirve un adapter? <br>
   Para interpretar los datos que se necesite mostrar una pantalla
 
-- ¿Qué clase contiene los identificadores de las vistas definidas en los layouts?
+- ¿Qué clase contiene los identificadores de las vistas definidas en los layouts? <br>
   La clase: R
 
-- ¿Qué atributo se debe definir para cargar los valores de un spinner?
+- ¿Qué atributo se debe definir para cargar los valores de un spinner? <br>
   Un array
