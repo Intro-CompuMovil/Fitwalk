@@ -72,3 +72,27 @@ LinearLayout organiza los elementos en una dirección lineal (horizontal o verti
 
 - ¿Qué atributo se debe definir para cargar los valores de un spinner? <br>
   Un array
+
+## Apuntes Manifest (permisos)
+
+A partir del 6 api 23 piden permisos CADA VEZ QUE SE EJECUTA
+
+antes en la 5.1 api 22 se necesitaba borrar para quitar permisos
+
+Con riesgo: gps, microfono fotos, calendario, contactos
+
+normales: Internet, bluetooth, zona horaria
+
+ContextCompact.ChechSelfPermision(): es para pedir permiso en un momento especifico
+
+shouldShowRequestestPermisionRationale(): texto de porque dar permiso
+
+requestPermision: pedir permiso
+
+Companion object: variable GLOBAL entre clases estática
+
+onRequiestPermisionResult: muchos if de qué hacer con los permisos que tenemos o no
+
+Adapter personalizado: Para mostrar los datos del cursor en un ListView, es necesario crear un adapter personalizado. Primero se crea un layout para cada posición de la lista en un xml separado (New -> XML -> Layout XML File)
+
+startActivityForResult() (en lugar de startActivity(): Para actividades que se salen de la app ej: seleccionar foto
