@@ -41,10 +41,10 @@ Fitwalk es una aplicación móvil que tiene como propósito llevar un registro d
   •SPs (scalable pixels): es para el tamaño del texto
 
 - ¿Qué es un text view? ¿Cuáles son los 2 atributos (fuera del texto) que son obligatorios y que aplican también para cualquier objeto dentro de cualquier layout? <br>
-  Alto y ancho
+Alto y ancho
 
 - ¿Cuál es la diferencia entre LinearLayout y ConstrainLayout? <br>
-  LinearLayout organiza los elementos en una dirección lineal (horizontal o vertical). ConstraintLayout utiliza restricciones para posicionar y ajustar los   elementos en una vista.
+LinearLayout organiza los elementos en una dirección lineal (horizontal o vertical). ConstraintLayout utiliza restricciones para posicionar y ajustar los   elementos en una vista.
 
 - ¿En dónde se deben guardar las cadenas de texto que se quieren mostrar en una aplicación Android? <br>
   En el archivo strings
