@@ -92,15 +92,19 @@ ContextCompact.ChechSelfPermision()
 shouldShowRequestestPermisionRationale()
 ```
 - Pedir permiso
-```
+```bash
 requestPermision
 ```
+- variable GLOBAL entre clases estática
+```bash
+Companion object
+```
+- muchos if de qué hacer con los permisos que tenemos o no
+```
+onRequiestPermisionResult
+```
+- **Adapter personalizado:** Para mostrar los datos del cursor en un ListView, es necesario crear un adapter personalizado. Primero se crea un layout para cada posición de la lista en un xml separado (New -> XML -> Layout XML File)
 
-
-Companion object: variable GLOBAL entre clases estática
-
-onRequiestPermisionResult: muchos if de qué hacer con los permisos que tenemos o no
-
-Adapter personalizado: Para mostrar los datos del cursor en un ListView, es necesario crear un adapter personalizado. Primero se crea un layout para cada posición de la lista en un xml separado (New -> XML -> Layout XML File)
-
-startActivityForResult() (en lugar de startActivity(): Para actividades que se salen de la app ej: seleccionar foto
+- en lugar de startActivity(): Para actividades que se salen de la app ej: seleccionar foto
+```
+startActivityForResult()
