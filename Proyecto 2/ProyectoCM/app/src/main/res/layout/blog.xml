@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Blog">
+
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="66dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_circular"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="no"
+        android:onClick="post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_photo_camera_50" />
+
+    <ListView
+        android:layout_width="0dp"
+        android:layout_height="521dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/orange_light"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            style="@style/ButtonSinBordes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:onClick="mapa"
+            app:srcCompat="@drawable/baseline_route_40" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            style="@style/ButtonSinBordes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:onClick="dashboard"
+            app:srcCompat="@drawable/baseline_space_dashboard_40" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            style="@style/ButtonSinBordes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            app:srcCompat="@drawable/baseline_image_black" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            style="@style/ButtonSinBordes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:onClick="chat"
+            app:srcCompat="@drawable/baseline_chat_40" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
