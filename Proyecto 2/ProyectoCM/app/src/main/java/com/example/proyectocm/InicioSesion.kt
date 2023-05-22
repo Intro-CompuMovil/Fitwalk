@@ -34,50 +34,78 @@ class InicioSesion : AppCompatActivity() {
 
     }
 
-    /*fun Ingresar(view: View){
-        val intent = Intent(this,Mapa::class.java)
-        startActivity(intent)
 
-    }*/
-    fun Ingresar(view: View){
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+    fun Ingresar(view: View) {
+        val permissionsList = mutableListOf<String>()
 
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION),
-                PERMISSIONS_REQUEST_ACCESS_LOCATION)
-        } else //si tiene permiso usar la ubicacion
-        {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_CODE
-                )
-            } else {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsList.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsList.add(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+
+        if (permissionsList.isNotEmpty()) {
+            val permissionsArray = permissionsList.toTypedArray()
+            ActivityCompat.requestPermissions(
+                this,
+                permissionsArray,
+                PERMISSIONS_REQUEST_ACCESS_LOCATION
+            )
+        } else {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == PERMISSIONS_REQUEST_ACCESS_LOCATION) {
+            val grantedPermissions = mutableListOf<String>()
+            val deniedPermissions = mutableListOf<String>()
+
+            for (i in permissions.indices) {
+                val permission = permissions[i]
+                val grantResult = grantResults[i]
+                if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                    grantedPermissions.add(permission)
+                } else {
+                    deniedPermissions.add(permission)
+                }
+            }
+
+            if (grantedPermissions.isNotEmpty()) {
+                // Los permisos han sido otorgados
+                // Realizar acciones adicionales si es necesario
                 val intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
             }
-        }
 
-        /*
-        firebase
-         */
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            PERMISSIONS_REQUEST_ACCESS_LOCATION -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Si el permiso es concedido, realizar la acción deseada
-                    // Por ejemplo, acceder a los contactos
-                } else {
-                    Toast.makeText(applicationContext,"Se necesita para el funcionamiento de la app", Toast.LENGTH_LONG).show()
-                }
+            if (deniedPermissions.isNotEmpty()) {
+                // Los permisos han sido denegados
+                // Puedes mostrar un mensaje o tomar otras acciones en consecuencia
             }
         }
     }
