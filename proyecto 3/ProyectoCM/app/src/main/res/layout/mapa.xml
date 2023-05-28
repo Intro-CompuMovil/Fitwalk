@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Mapa">
+
+    <Button
+        android:id="@+id/salir"
+        android:layout_width="64dp"
+        android:layout_height="46dp"
+        android:background="@drawable/background_button_orange"
+        android:text="salir"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_view"
+            android:importantForAccessibility="no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:liteMode="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/orange_light"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            style="@style/ButtonSinBordes"
+            app:srcCompat="@drawable/baseline_route_black" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="dashboard"
+            android:importantForAccessibility="no"
+            style="@style/ButtonSinBordes"
+            app:srcCompat="@drawable/baseline_space_dashboard_40" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="blog"
+            android:importantForAccessibility="no"
+            style="@style/ButtonSinBordes"
+            app:srcCompat="@drawable/baseline_image_40" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="chat"
+            android:importantForAccessibility="no"
+            style="@style/ButtonSinBordes"
+            app:srcCompat="@drawable/baseline_chat_40" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

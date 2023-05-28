@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "912232681346",
+    "firebase_url": "https://proyectocm-3df98-default-rtdb.firebaseio.com",
+    "project_id": "proyectocm-3df98",
+    "storage_bucket": "proyectocm-3df98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912232681346:android:34d85d3f7c703766b4c99b",
+        "android_client_info": {
+          "package_name": "com.example.proyectocm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUdqLMy9G0PF8xvBo9e555S2JVKCMNf5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
