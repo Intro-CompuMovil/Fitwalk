@@ -1,9 +1,12 @@
 package com.example.proyectocm
 
+import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +14,17 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -26,11 +37,18 @@ class Post : AppCompatActivity() {
 
     private lateinit var foto: ImageView
     private lateinit var rutaImagen: Uri
+    private lateinit var titulo: EditText
+    private lateinit var desc: EditText
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.post)
         foto = findViewById<ImageView>(R.id.imageView)
+        titulo = findViewById<EditText>(R.id.tituloPostID)
+        desc = findViewById<EditText>(R.id.bioPostID)
+
+
     }
 
     fun galeria(view: View){
@@ -47,8 +65,69 @@ class Post : AppCompatActivity() {
     }
 
     fun guardarPost(view: View){
-        val intent =Intent(this,Blog::class.java)
-        startActivity(intent)
+
+        if (titulo.text.isNotEmpty() && desc.text.isNotEmpty() && foto.drawable != null && foto.drawable is BitmapDrawable && (foto.drawable as BitmapDrawable).bitmap != null) {
+            database = FirebaseDatabase.getInstance().getReference("Post")
+
+            //REALTIME DATABASE
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+
+            }
+            var id =UUID.randomUUID().toString()
+
+            val post = datosPost(
+                titulo.text.toString(),
+                desc.text.toString(),
+                id
+            )
+
+
+            val nuevoNodo = database.push()
+            nuevoNodo.setValue(post)
+                .addOnSuccessListener { taskSnapshot ->
+                    Toast.makeText(applicationContext,"Post publicado correctamente", Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(applicationContext,"Error al publicar el post", Toast.LENGTH_LONG).show()
+                }
+            /* database.child(userId.toString()).setValue(usuario)
+         .addOnSuccessListener {
+             nombre.text.clear()
+             apellido.text.clear()
+             identificacion.text.clear()
+
+         }*/
+
+
+            val storage = Firebase.storage
+            val storageRef = storage.reference.child("imagenes/" + id)
+            val drawable = foto.drawable as BitmapDrawable
+            val bitmap = drawable.bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+            storageRef.putBytes(data)
+                .addOnSuccessListener { taskSnapshot ->
+                    // El archivo se ha subido exitosamente
+                }
+                .addOnFailureListener { exception ->
+                    // Error al subir el archivo
+                }
+
+            val intent =Intent(this,Blog::class.java)
+            startActivity(intent)
+        }
+        else{
+            Toast.makeText(applicationContext,"Llene todos los datos", Toast.LENGTH_LONG).show()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -88,7 +167,7 @@ class Post : AppCompatActivity() {
         )
         return FileProvider.getUriForFile(
             this,
-            "com.example.ProyectoCM.fileprovider",
+            "com.example.proyectocm.fileprovider",
             imagen
         )
     }

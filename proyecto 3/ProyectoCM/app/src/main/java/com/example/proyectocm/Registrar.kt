@@ -119,7 +119,8 @@ class Registrar : AppCompatActivity() {
 
         aceptar.setOnClickListener{
 
-            if(email.text.isNotEmpty() && password.text.isNotEmpty() && nombre.text.isNotEmpty() && apellido.text.isNotEmpty() && identificacion.text.isNotEmpty()  && imagen.drawable !=null ){
+            if(email.text.isNotEmpty() && password.text.isNotEmpty() && nombre.text.isNotEmpty() &&
+                apellido.text.isNotEmpty() && identificacion.text.isNotEmpty()  && imagen.drawable != null && imagen.drawable is BitmapDrawable && (imagen.drawable as BitmapDrawable).bitmap != null){
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),password.text.toString()).addOnCompleteListener(){
                     if(it.isSuccessful){
