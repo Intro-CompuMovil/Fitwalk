@@ -1,42 +1,31 @@
 package com.example.proyectocm.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectocm.R
 //import com.example.proyectocm.RastreoActivity
-import com.example.proyectocm.Usuario
-import com.example.proyectocm.MapsActivity
+import com.example.proyectocm.datosPost
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
-class UsuarioViewHolder(view: View, private val context: Context) : RecyclerView.ViewHolder(view) {
+class PostViewHolder(view: View, private val context: Context) : RecyclerView.ViewHolder(view) {
 
-    val foto = view.findViewById<ImageView>(R.id.user_image)
-    val nombre = view.findViewById<TextView>(R.id.user_name)
-    val apellido = view.findViewById<TextView>(R.id.user_lastname)
-    val rastreo = view.findViewById<Button>(R.id.rastreo)
+    val foto = view.findViewById<ImageView>(R.id.post_image)
+    val titulo = view.findViewById<TextView>(R.id.titulo)
+    val desc = view.findViewById<TextView>(R.id.descpripcion)
 
 
-    fun render(usuarioModel: Usuario)
+    fun render(postModel: datosPost)
     {
-        nombre.text =usuarioModel.Nombre
-        apellido.text=usuarioModel.Apellido
-        val persona = usuarioModel.Nombre+" "+usuarioModel.Apellido
-        val id =usuarioModel.Id
+        titulo.text =postModel.titulo
+        desc.text="Descripción: \n"+postModel.descripcion
+        val id =postModel.id
 
-        //ACA
-        /*val drawable = foto.drawable as BitmapDrawable
-        val bitmap = drawable.bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()*/
 
         val storage= FirebaseStorage.getInstance().reference.child("imagenes/$id")
         val localfile = File.createTempFile("TempImage","jpeg")
@@ -48,7 +37,7 @@ class UsuarioViewHolder(view: View, private val context: Context) : RecyclerView
         }
 
 
-        rastreo.setOnClickListener(){
+        /*rastreo.setOnClickListener(){
 
             println( "lat:  " +usuarioModel.Latitud.toString()+" lon: "+
             usuarioModel.Longitud.toString() )
@@ -58,6 +47,6 @@ class UsuarioViewHolder(view: View, private val context: Context) : RecyclerView
             intent.putExtra("persona",persona)
             intent.putExtra("id",id)
             context.startActivity(intent)
-        }
+        }*/
     }
 }
