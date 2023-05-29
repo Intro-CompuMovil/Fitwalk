@@ -44,7 +44,7 @@ class amigosActivity : AppCompatActivity() {
     var valida=false
     private lateinit var usuariosAdapter: UsuarioAdapter
     private lateinit var myRef: DatabaseReference
-    var califica = false
+    var califica = true
     private lateinit var Mutalblelista:MutableList<Usuario>
 
 
@@ -84,11 +84,7 @@ class amigosActivity : AppCompatActivity() {
 
         val agregar = findViewById<Button>(R.id.agregar)
         agregar.setOnClickListener{
-
-            escribirDatos(amigo.text.toString())
-            obtenerAmigos()
-            leerUsuarios()
-
+            checkEmailAuthentication(amigo.text.toString())
         }
 
 
@@ -173,7 +169,6 @@ class amigosActivity : AppCompatActivity() {
                     amigosRef.setValue(updatedList)
                         .addOnSuccessListener {
                             // La lista se actualizó correctamente
-                            Toast.makeText(this@amigosActivity, "amigo agregado", Toast.LENGTH_SHORT).show()
 
                         }
                         .addOnFailureListener { error ->
@@ -198,13 +193,11 @@ class amigosActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
 
                 val usuario = snapshot.getValue(Usuario::class.java)
-                if (usuario != null) {
-                    if (usuario.email in amigosUs.orEmpty()) {
                         usuario?.let {
                             guardarUsuario(it)
                         }
-                    }
-                }
+
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -264,6 +257,30 @@ class amigosActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewUsuarios)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = UsuarioAdapter(Mutalblelista.toList(), this)
+    }
+    private fun checkEmailAuthentication(email: String) {
+        val auth = FirebaseAuth.getInstance()
+
+        auth.fetchSignInMethodsForEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val signInMethods = task.result?.signInMethods
+                    if (signInMethods.isNullOrEmpty()) {
+                        Toast.makeText(this@amigosActivity,"El correo electrónico no está autenticado en Firebase.", Toast.LENGTH_SHORT).show()
+                        califica=false
+                    } else {
+                        Toast.makeText(this@amigosActivity, "lista actualizada", Toast.LENGTH_SHORT).show()
+                        println("Métodos de inicio de sesión: $signInMethods")
+                        califica=true
+                        escribirDatos(amigo.text.toString())
+                        obtenerAmigos()
+                        leerUsuarios()
+                    }
+                } else {
+                    Toast.makeText(this@amigosActivity, "Error al verificar el correo electrónico: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    califica=false
+                }
+            }
     }
 
 
