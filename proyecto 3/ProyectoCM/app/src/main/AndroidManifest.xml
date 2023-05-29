@@ -56,15 +56,11 @@
         <activity
             android:name=".Dashboard"
             android:exported="false" />
-        <activity
-            android:name=".Mapa"
-            android:exported="false" />
+
         <activity
             android:name=".Registrar"
             android:exported="false" />
-        <activity
-            android:name=".Recuperar"
-            android:exported="false" />
+
         <activity
             android:name=".InicioSesion"
             android:exported="true">
