@@ -145,43 +145,33 @@ class amigosActivity : AppCompatActivity() {
 
 
     private fun escribirDatos(guardarDat: String) {
-
         val amigosRef = myRef.child("amigos")
 
-        // Obtener la lista actual del nodo "amigos"
         amigosRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     val disponibleList = dataSnapshot.getValue(object : GenericTypeIndicator<ArrayList<String>>() {})
-
-                    // Verificar si la lista es nula y crear una nueva lista en caso afirmativo
                     val updatedList = disponibleList ?: ArrayList()
-
-                    // Agregar los amigos seleccionados a la lista
                     updatedList.addAll(listOf(guardarDat))
-
-                    // Eliminar duplicados utilizando un conjunto
                     val uniqueSet = LinkedHashSet(updatedList)
                     updatedList.clear()
                     updatedList.addAll(uniqueSet)
 
-                    // Actualizar la lista en Firebase
                     amigosRef.setValue(updatedList)
                         .addOnSuccessListener {
-                            // La lista se actualizó correctamente
-
+                            obtenerAmigos()
+                            leerUsuarios()
                         }
                         .addOnFailureListener { error ->
-                            // Ocurrió un error al actualizar la lista
+                            Toast.makeText(this@amigosActivity, "Ocurrió un error al actualizar la lista de amigos", Toast.LENGTH_SHORT).show()
                         }
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Ocurrió un error al leer los datos de Firebase
+                Toast.makeText(this@amigosActivity, "Ocurrió un error al leer los datos de Firebase", Toast.LENGTH_SHORT).show()
             }
         })
-
     }
 
     private fun leerUsuarios() {
