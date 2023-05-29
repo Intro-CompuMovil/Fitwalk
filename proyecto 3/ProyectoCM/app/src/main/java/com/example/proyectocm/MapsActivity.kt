@@ -301,13 +301,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-
-
-    private fun agregarServ(servicios: ArrayList<String>) {
-
-    }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

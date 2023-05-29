@@ -125,7 +125,7 @@ class Blog : AppCompatActivity() {
         }
     }
     fun initRecyclerView(){
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerUsuario)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerPost)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = PostAdapter(Mutalblelista.toList(), this)
 

@@ -151,7 +151,9 @@ class Registrar : AppCompatActivity() {
                                 identificacion.text.toString(),
                                 location.latitude,
                                 location.longitude,
-                                (listOf(""))
+                                (listOf("")),
+                                (listOf("")),
+                                email.text.toString()
                             )
                             val user = FirebaseAuth.getInstance().currentUser
                             val userId = user?.uid
