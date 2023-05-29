@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.Intent
 
 import android.content.pm.PackageManager
+import android.location.Geocoder
 
 
 import android.location.Location
@@ -41,6 +42,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -146,6 +148,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val fechaHora = LocalDateTime.now().format(formatter)
             guardarDat="fecha y hora inicial: "+ fechaHora.toString()+"| "
             //guardar ubicacion
+            //guardar ubicacion
+            var Ubicacion = LatLng(miLatRec, miLonRec)
+            guardarDat = guardarDat + "nombre de la ubicacion inicial: " + geoCoderSearchLatLang(Ubicacion) + "| "
             guardarDat=guardarDat+"latitud inicial: "+miLatRec+"| "
             guardarDat=guardarDat+"longitud inicial: "+miLonRec+"| "
 
@@ -153,30 +158,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.terminar.setOnClickListener {
             inic = false//detener las actualizaciones
             if (velocidades.isNotEmpty()) {
-            //guardar hora y dia
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            val fechaHora = LocalDateTime.now().format(formatter)
-            guardarDat=guardarDat+"fecha y hora final: "+ fechaHora.toString()+"| "
-            //guardar ubicacion
-            guardarDat=guardarDat+"latitud final: "+miLatRec+"| "
-            guardarDat=guardarDat+"longitud final: "+miLonRec+"| "
+                //guardar hora y dia
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                val fechaHora = LocalDateTime.now().format(formatter)
+                guardarDat = guardarDat + "fecha y hora final: " + fechaHora.toString() + "| "
+                //guardar ubicacion
+                var Ubicacion = LatLng(miLatRec, miLonRec)
+                guardarDat = guardarDat + "nombre de la ubicacion final: " + geoCoderSearchLatLang(Ubicacion) + "| "
+                guardarDat = guardarDat + "latitud final: " + miLatRec + "| "
+                guardarDat = guardarDat + "longitud final: " + miLonRec + "| "
 
-            //guardar velocidad promedio
+                //guardar velocidad promedio
                 val sum = velocidades.sum()
                 val velocidadProm = sum / velocidades.size
 
-                guardarDat = guardarDat + "velocidad promedio: " + String.format("%.2f", velocidadProm) + " m/s| "
+                guardarDat = guardarDat + "velocidad promedio: " + String.format(
+                    "%.2f",
+                    velocidadProm
+                ) + " m/s| "
 
 
                 //guardar METROS
-                guardarDat = guardarDat + "metros recorridos : " + String.format("%.2f", distRec) + "\n"
+                guardarDat =
+                    guardarDat + "metros recorridos : " + String.format("%.2f", distRec) + "\n"
                 escribirDatos(guardarDat)
 
                 //borrar datos
-                guardarDat =""
+                guardarDat = ""
 
-                distRec=0.0
-                binding.textView.text = " "+distRec+" metros recorridos"
+                distRec = 0.0
+                binding.textView.text = " " + distRec + " metros recorridos"
 
                 Toast.makeText(this, "Trayecto finalizado", Toast.LENGTH_SHORT).show()
 
@@ -327,8 +338,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnMapLongClickListener { latLng ->
 
             mMap.addMarker(
-                //MarkerOptions().position(latLng).title(geoCoderSearchLatLang(latLng))
-                MarkerOptions().position(latLng).title("MARCADOR " + marcador.toString())
+                MarkerOptions().position(latLng).title(geoCoderSearchLatLang(latLng))
 
             )
             marcador++
@@ -338,6 +348,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 abs(calcularDistancia(miLat, miLon, latLng.latitude, latLng.longitude))
         }
 
+    }
+
+    private fun geoCoderSearchLatLang(latLng: LatLng): String? {
+        val geoCoder = Geocoder(this@MapsActivity, Locale.getDefault())
+        val addresses = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+        var address = ""
+
+        if (addresses != null && addresses.size > 0) {
+            val returnedAddress = addresses[0]
+            val thoroughfare = returnedAddress.thoroughfare
+            val subThoroughfare = returnedAddress.subThoroughfare
+            val locality = returnedAddress.locality
+            val subLocality = returnedAddress.subLocality
+
+            address = if (thoroughfare != null && subThoroughfare != null) {
+                "$subThoroughfare $thoroughfare, $locality"
+            } else if (thoroughfare != null) {
+                "$thoroughfare, $locality"
+            } else if (subLocality != null) {
+                "$subLocality, $locality"
+            } else {
+                locality
+            }
+        }
+
+        return address
     }
 
 
