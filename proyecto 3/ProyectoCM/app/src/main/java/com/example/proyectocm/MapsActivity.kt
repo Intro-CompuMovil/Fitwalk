@@ -87,7 +87,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         auth = Firebase.auth
 
         myRef = database.getReference(PATH_USERS+auth.currentUser!!.uid)
-        myRef02 = database.getReference(PATH_USERS)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this@MapsActivity)
         mLocationRequest = createLocationRequest()
@@ -254,7 +253,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         else
         {
-            val intent = Intent(this, Chat::class.java)
+            val intent = Intent(this, amigosActivity::class.java)
             startActivity(intent)
         }
 

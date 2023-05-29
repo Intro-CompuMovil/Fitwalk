@@ -48,7 +48,7 @@
             android:name=".Post"
             android:exported="false" />
         <activity
-            android:name=".Chat"
+            android:name=".amigosActivity"
             android:exported="false" />
         <activity
             android:name=".Blog"

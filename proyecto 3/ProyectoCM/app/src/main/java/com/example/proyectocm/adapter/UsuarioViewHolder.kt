@@ -26,22 +26,16 @@ class UsuarioViewHolder(view: View, private val context: Context) : RecyclerView
     val foto = view.findViewById<ImageView>(R.id.user_image)
     val nombre = view.findViewById<TextView>(R.id.user_name)
     val apellido = view.findViewById<TextView>(R.id.user_lastname)
-    val rastreo = view.findViewById<Button>(R.id.rastreo)
+    val correo = view.findViewById<TextView>(R.id.correo)
 
 
     fun render(usuarioModel: Usuario)
     {
         nombre.text =usuarioModel.Nombre
         apellido.text=usuarioModel.Apellido
-        val persona = usuarioModel.Nombre+" "+usuarioModel.Apellido
-        val id =usuarioModel.Id
+        correo.text =usuarioModel.email
 
-        //ACA
-        /*val drawable = foto.drawable as BitmapDrawable
-        val bitmap = drawable.bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()*/
+        val id =usuarioModel.Id
 
         val storage= FirebaseStorage.getInstance().reference.child("imagenes/$id")
         val localfile = File.createTempFile("TempImage","jpeg")

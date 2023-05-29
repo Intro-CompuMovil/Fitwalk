@@ -52,7 +52,7 @@ class Dashboard : AppCompatActivity() {
         }
         else
         {
-            val intent = Intent(this, Chat::class.java)
+            val intent = Intent(this, amigosActivity::class.java)
             startActivity(intent)
         }
     }
